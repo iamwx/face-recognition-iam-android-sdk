@@ -1,0 +1,40 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="ButtonMine" parent="Widget.AppCompat.Button">
+        <item name="android:colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="FontMulticolore">
+        <item name="fontPath">fonts/Multicolore.otf</item>
+        <!--<item name="android:textSize">16sp</item>-->
+        <!--<item name="android:textColor">#FFFFFF</item>-->
+    </style>
+
+    <style name="TextViewMulticolore">
+        <item name="fontPath">fonts/Multicolore.ttf</item>
+    </style>
+
+    <style name="TextViewRobotoMedium">
+        <item name="fontPath">fonts/Roboto_medium.ttf</item>
+    </style>
+    <style name="TextViewRobotoThin">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+    <style name="TextViewRobotoBold">
+        <item name="fontPath">fonts/Roboto_bold.ttf</item>
+    </style>
+    <style name="TextViewRobotoRegular">
+        <item name="fontPath">fonts/Roboto_regular.ttf</item>
+    </style>
+
+</resources>

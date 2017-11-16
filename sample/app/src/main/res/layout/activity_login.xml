@@ -1,0 +1,144 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <TextView
+                style="@style/FontMulticolore"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+            <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="#00FFFFFF" />-->
+
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+            <!--android:background="?attr/colorPrimary"-->
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:orientation="vertical">
+
+            <!-- Login progress -->
+            <LinearLayout
+                android:id="@+id/login_progress_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone">
+                <ProgressBar
+                    android:id="@+id/login_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/login_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="false">
+
+                <LinearLayout
+                    android:id="@+id/email_login_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
+                    android:paddingTop="20dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=" "
+                        android:layout_marginBottom="10dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name"
+                            style="@style/TextViewRobotoRegular"
+                            android:inputType="textPersonName|textCapWords"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="#767676"
+                            android:textSize="16sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/numberLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=" "
+                        android:layout_marginTop="10dp">
+
+                        <co.hypersecure.Views.PrefixedEditText
+                            android:id="@+id/phoneNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="9dp"
+                            android:hint="Mobile No"
+                            style="@style/TextViewRobotoRegular"
+                            android:inputType="phone|textFilter"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="#767676"
+                            android:textSize="16sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="61.3dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:paddingTop="16dp"
+            android:text="Next"
+            style="@style/TextViewMulticolore"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/colorGray"
+            android:textSize="16sp" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

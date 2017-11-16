@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.hypersecure.Activities.AuthActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!--<ViewAnimator-->
+    <!--android:id="@+id/view_animator"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:clickable="true"-->
+    <!--android:visibility="gone">-->
+
+    <!--<include-->
+    <!--android:id="@+id/walk1"-->
+    <!--layout="@layout/layout_walkthrough_1" />-->
+
+    <!--<include-->
+    <!--android:id="@+id/walk2"-->
+    <!--layout="@layout/layout_walkthrough_2" />-->
+
+    <!--<include-->
+    <!--android:id="@+id/walk3"-->
+    <!--layout="@layout/layout_walkthrough_3" />-->
+
+    <!--</ViewAnimator>-->
+
+
+</android.support.design.widget.CoordinatorLayout>

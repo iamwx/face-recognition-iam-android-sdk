@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.hypersecure.Activities.LandingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="@color/colorPrimaryDark">
+        </View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary"
+            android:text="HYPERSECURE"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            style="@style/FontMulticolore"
+            android:textSize="18sp"
+            android:gravity="center_vertical|center_horizontal"
+            />
+
+
+        <LinearLayout
+            android:layout_width="206dp"
+            android:layout_height="206dp"
+            android:orientation="vertical"
+            android:layout_marginTop="104dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@drawable/shape_circle_enter_room"
+            android:onClick="onEnterRoomButtonClick"
+            android:elevation="20dp"
+            android:id="@+id/ll_btn_enter_room">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="49dp"
+                android:src="@drawable/ic_enterroom_opendoor"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/iv_enter_room_info"
+                android:layout_marginTop="46dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ENTER ROOM"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#FFFFFF"
+                android:textSize="21sp"
+                android:id="@+id/tv_enter_room"
+                />
+        </LinearLayout>
+        
+        <View
+            android:layout_width="53dp"
+            android:layout_height="1dp"
+            android:background="#C8C8C8"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="123dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#9b9b9b"
+            android:textSize="13sp"
+            android:textAlignment="center"
+            android:layout_marginTop="19dp"
+            android:paddingLeft="65dp"
+            android:paddingRight="65dp"
+            style="@style/TextViewRobotoRegular"
+            android:text="Deep learning based Face-recognition that enables superior access control and identity verification"/>
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

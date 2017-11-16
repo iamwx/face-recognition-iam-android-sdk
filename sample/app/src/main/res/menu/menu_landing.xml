@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="co.hypersecure.Activities.LandingActivity">
+    <item
+        android:id="@+id/action_enable_auto_capture"
+        android:orderInCategory="100"
+        android:title="@string/action_auto_capture_enable"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_disable_auto_capture"
+        android:orderInCategory="100"
+        android:title="@string/action_auto_capture_disable"
+        android:checkable="true"
+        app:showAsAction="never" />
+</menu>

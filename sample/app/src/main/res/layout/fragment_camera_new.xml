@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activities.AuthActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar"
+        android:background="#FFFFFF">
+
+        <Button
+            android:layout_width="15.3dp"
+            android:layout_height="15.3dp"
+            android:id="@+id/cancel_button"
+            android:padding="20dp"
+            android:background="@drawable/ic_camera_cross_dark"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="21dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewMulticolore"
+            android:textSize="12sp"
+            android:text="@string/app_name"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:textColor="#9b9b9b"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/camview_parent">
+
+        <co.hyperverge.hypersecuresdk.workflows.fr.Views.HVFrCamera
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cameraFL">
+
+        </co.hyperverge.hypersecuresdk.workflows.fr.Views.HVFrCamera>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewMulticolore"
+            android:text="TAKE A SELFIE TO AUTHENTICATE"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="422.3dp"
+            android:paddingLeft="21dp"
+            android:paddingRight="21dp"
+            android:paddingTop="13.3dp"
+            android:paddingBottom="13.3dp"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_camera_click" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <!--</RelativeLayout>-->
+
+    <View
+        android:id="@+id/v_flash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b1ffffff"
+        android:visibility="gone" />
+
+</FrameLayout>

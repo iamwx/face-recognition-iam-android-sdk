@@ -1,0 +1,103 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
+
+    <style name="Base.Theme.Silver" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.Silver.Fullscreen" parent="Base.Theme.Silver">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="AppTheme.NoActionBar">
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleStyle">@style/RtlOverlay.DialogWindowTitle.AppCompat</item>
+        <item name="android:windowTitleBackgroundStyle">
+            @style/Base.DialogWindowTitleBackground.AppCompat
+        </item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+
+        <item name="listPreferredItemPaddingLeft">24dip</item>
+        <item name="listPreferredItemPaddingRight">24dip</item>
+
+        <item name="android:listDivider">@null</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ButtonMine" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="FontMulticolore">
+        <item name="fontPath">fonts/Multicolore.otf</item>
+        <!--<item name="android:textSize">16sp</item>-->
+        <!--<item name="android:textColor">#FFFFFF</item>-->
+    </style>
+
+    <style name="TextViewMulticolore">
+        <item name="fontPath">fonts/Multicolore.ttf</item>
+    </style>
+
+    <style name="TextViewRobotoMedium">
+        <item name="fontPath">fonts/Roboto_medium.ttf</item>
+    </style>
+    <style name="TextViewRobotoThin">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>
+    <style name="TextViewRobotoBold">
+        <item name="fontPath">fonts/Roboto_bold.ttf</item>
+    </style>
+    <style name="TextViewRobotoRegular">
+        <item name="fontPath">fonts/Roboto_regular.ttf</item>
+    </style>
+
+</resources>

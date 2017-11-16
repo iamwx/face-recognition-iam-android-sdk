@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="27dp">
+
+    <RelativeLayout
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/background_blue_progress_rotate"
+            android:progressDrawable="@drawable/background_blue_progress_rotate"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_marginTop="10.7dp"
+            android:text="Message"
+            android:textAlignment="center"
+            style="@style/TextViewDINRegular"
+            android:textColor="#4a4a4a"
+            android:id="@+id/dialog_message"/>
+        <!--style="@style/TextViewRobotoRegular"-->
+    </LinearLayout>
+
+</LinearLayout>

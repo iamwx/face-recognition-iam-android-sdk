@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/ic_done_tick"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="10.7dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Welcome"
+        style="@style/TextViewDINLight"
+        android:textColor="#4a4a4a"
+        android:id="@+id/tv_dialog_name_prefix"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:layout_marginTop="10.7dp"
+        android:layout_marginBottom="28dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Vignesh"
+        style="@style/TextViewDINLight"
+        android:textColor="#4a4a4a"
+        android:id="@+id/tv_dialog_name"/>
+
+</LinearLayout>

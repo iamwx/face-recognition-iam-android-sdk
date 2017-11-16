@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activities.SelfieActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@string/app_name"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:textColor="#9b9b9b"
+            style="@style/TextViewMulticolore"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <co.hyperverge.hypersecuresdk.workflows.fr.Views.HVFrCamera
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cameraFL">
+        </co.hyperverge.hypersecuresdk.workflows.fr.Views.HVFrCamera>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewMulticolore"
+            android:text="TAKE A SELFIE TO REGISTER"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="422.3dp"
+            android:paddingLeft="21dp"
+            android:paddingRight="21dp"
+            android:paddingTop="13.3dp"
+            android:paddingBottom="13.3dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="4"
+        android:text="Take a selfie to register yourself with our Deep Learning Face Recognition System"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:gravity="center"
+        android:padding="12dp"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="4"
+        android:text=""
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/tvTitle">
+
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/ic_button_flash_auto"-->
+            <!--android:visibility="invisible"></ImageView>-->
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_camera_clicked_count"
+            android:layout_weight="1"
+            style="@style/TextViewRobotoBold"
+            android:visibility="invisible"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+
+        <ImageView
+            android:id="@+id/btCapture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_camera_click" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/btSubmit"
+                android:layout_width="63dp"
+                android:layout_height="63dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_camera_done" />
+        </FrameLayout>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btRotate"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@drawable/ic_button_camera_rotate"-->
+            <!--android:visibility="visible"></ImageView>-->
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_flash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b1ffffff"
+        android:visibility="gone" />
+
+</RelativeLayout>
