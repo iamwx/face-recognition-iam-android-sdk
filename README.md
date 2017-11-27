@@ -276,7 +276,7 @@ hvfrcamera.clearCapturedImages();
 |6|Internal Server Error|Occurs when there is an internal error at the server.|Notify HyperVerge|
 |7|Request Error|Occurs when the request to server is missing some parameters.| Confirm if all the parameters are passed to the method properly|
 |8|Internal SDK Error|Occurs when an unexpected error has happened with the HyperSecure SDK.|Notify HyperVerge|
-|9|Face Recognition Error|Occurs when there is an error with the Face Recognition. This mosly happens when a Face Recognition/Verification flow is run on a person not already enrolled, face detected by the device is not very clear, unknown person is trying the recognition/verification.| Try again after ensuring that the person is already enrolled and the lightening is also proper.|
+|9|Face Recognition Error|Occurs when there is an error with the Face Recognition. This mosly happens when a Face Recognition/Verification flow is run on a person not already enrolled, face detected by the device is not very clear, unknown person is trying the recognition/verification.| Try again after ensuring that the person is already enrolled and the lighting is also proper.|
 
 ##### Description of the Error Codes in `onCaptureCallback` callback method of the `myFrCamListener`  is given below:
 |Error Code|Description|Explanation|Action|
