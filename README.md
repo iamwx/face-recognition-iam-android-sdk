@@ -134,7 +134,9 @@ HVFrCamera.HVFrCameraListener myFrCamListener = new HVFrCamera.HVFrCameraListene
         - `groupId`: Group in which Recognition has been performed
         - `userId`: Unique id of the user recognized by Recognition
         - `userInfo`: Some more details about the user
-        - `imageUri`: SON Array of String in which first element indicates the local file path of the face image on which user has been recognized
+        - `imageUri`: JSON Array of String in which first element indicates the local file path of the face image on which user has been recognized
+    - Capture Mode:
+    	- `imageUri`: JSON Array of String in which first element indicates the local file path of the face image that has been captured
 
 
 ##### Adding HVFrCamera View to your Activity/Fragment
@@ -181,7 +183,7 @@ HVFrCamera View is a sub-class of FrameLayout. This is a view with a fixed aspec
 	```
 	
 	The arguments accepted by the start camera function are the Configuration variables for HVFrCamera. The `startCamera()` method will set these variables and set HVFrCamera to start processing the camera feed. The details of the variables are given below.
-	- `mode` can have a value among FRMode.REGISTER, FRMode.FACE_ADD, FRMode.RECOGNITION, and FRMode.VERIFICATION
+	- `mode` can have a value among FRMode.REGISTER, FRMode.FACE_ADD, FRMode.RECOGNITION, FRMode.VERIFICATION, and FRMode.CAPTURE
     - `userData` is the JSONObject having userDetails (explanation below)
    	- `timeout` is the maximum time in milliseconds since startCamera() or resumeCamera() after which if the registration/recognition is not done, the onError will be called with Timeout Error. A value of 0 will disable the timeout
    	- `isAutoCaptureEnabled` is a boolean value that specifies if automatic capture of image should happen for recognition when a face matching the desired size is detected. Please note that auto-capture is not supported for Registration mode or Face Add mode 
@@ -204,6 +206,8 @@ HVFrCamera View is a sub-class of FrameLayout. This is a view with a fixed aspec
     - Recognition Mode:
         - `tenantId`: Used to identify the organization where Recognition should be performed. Should be same as the one used to initialize the SDK
         - `groupId`: Group where Recognition should be performed
+    - Capture Mode:
+        - Empty JSONObject
 
 **Please note:** the group will have to be created before use in HVFrCamera. If no groupId is passed, we will assume that `default` group is being used. The `default` group is by default created for all tenants upon creation of the tenant
     
@@ -262,6 +266,29 @@ hvfrcamera.clearCapturedImages();
     - `HVFrCamera.ERROR_CLEAR_CAPTURED_IMAGES_INVALID_MODE`: This means that this method is called for an invalid mode. As mentioned above, this method only works for REGISTRATION and FACE_ADD mode.
     - `HVFrCamera.ERROR_CLEAR_CAPTURED_IMAGES_CAMERA_NOT_FREE`: This means that an image capture is in progress. Hence the images cannot be cleared now. When this error occurs, please retry after some time.
     - `HVFrCamera.ERROR_CLEAR_CAPTURED_IMAGES_PROCESSING_STARTED`: This means that an image upload is already in progress and hence the images cannot be cleared now. Please retry once the processing is done and an appropriate callback method of the listener is called.
+
+##### Progress Callbacks
+Following method can be used to set progress callback which includes methods that will be called when the processing on the captured image starts and ends.
+
+```
+hvfrcamera.setProgressListener(myHVFrCameraProgressListener);
+```
+where myHVFrCameraProgressListener can be implemented as:
+```
+HVFrCameraProgressListener myHVFrCameraProgressListener = new HVFrCamera.HVFrCameraProgressListener() {
+	@Override
+	public void onFaceProcessingStart(JSONObject info) {
+		//called when the upload of image to server starts for any FR operation
+		//info will have following details:
+		//	• imageUri: localpath of the face crop image being uploaded to server
+	}
+
+	@Override
+	public void onFaceProcessingEnd() {
+		//called when the server has given a response for the image being uploaded
+	}
+}
+```
 
 ##### Description of the Error Codes in `onError` callback method of the `myFrCamListener`  is given below: 
 
