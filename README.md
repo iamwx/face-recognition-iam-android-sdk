@@ -290,6 +290,8 @@ HVFrCameraProgressListener myHVFrCameraProgressListener = new HVFrCamera.HVFrCam
 }
 ```
 
+Please note that **setting progress callback is completely optional** and if not set, the default progress would be shown by the SDK.
+
 ##### Description of the Error Codes in `onError` callback method of the `myFrCamListener`  is given below: 
 
 |Error Code|Description|Explanation|Action|
