@@ -42,7 +42,7 @@ A high-level overview of the Face Recognition workflow is as follows:
 
         ```
         dependencies {
-            compile('co.hyperverge:hypersecuresdk:1.1.5@aar', {
+            compile('co.hyperverge:hypersecuresdk:1.2.1@aar', {
                 transitive=true
             })
         }
@@ -134,7 +134,9 @@ HVFrCamera.HVFrCameraListener myFrCamListener = new HVFrCamera.HVFrCameraListene
         - `groupId`: Group in which Recognition has been performed
         - `userId`: Unique id of the user recognized by Recognition
         - `userInfo`: Some more details about the user
-        - `imageUri`: SON Array of String in which first element indicates the local file path of the face image on which user has been recognized
+        - `imageUri`: JSON Array of String in which first element indicates the local file path of the face image on which user has been recognized
+    - Capture Mode:
+    	- `imageUri`: JSON Array of String in which first element indicates the local file path of the face image that has been captured
 
 
 ##### Adding HVFrCamera View to your Activity/Fragment
@@ -181,7 +183,7 @@ HVFrCamera View is a sub-class of FrameLayout. This is a view with a fixed aspec
 	```
 	
 	The arguments accepted by the start camera function are the Configuration variables for HVFrCamera. The `startCamera()` method will set these variables and set HVFrCamera to start processing the camera feed. The details of the variables are given below.
-	- `mode` can have a value among FRMode.REGISTER, FRMode.FACE_ADD, FRMode.RECOGNITION, and FRMode.VERIFICATION
+	- `mode` can have a value among FRMode.REGISTER, FRMode.FACE_ADD, FRMode.RECOGNITION, FRMode.VERIFICATION, and FRMode.CAPTURE
     - `userData` is the JSONObject having userDetails (explanation below)
    	- `timeout` is the maximum time in milliseconds since startCamera() or resumeCamera() after which if the registration/recognition is not done, the onError will be called with Timeout Error. A value of 0 will disable the timeout
    	- `isAutoCaptureEnabled` is a boolean value that specifies if automatic capture of image should happen for recognition when a face matching the desired size is detected. Please note that auto-capture is not supported for Registration mode or Face Add mode 
@@ -204,6 +206,8 @@ HVFrCamera View is a sub-class of FrameLayout. This is a view with a fixed aspec
     - Recognition Mode:
         - `tenantId`: Used to identify the organization where Recognition should be performed. Should be same as the one used to initialize the SDK
         - `groupId`: Group where Recognition should be performed
+    - Capture Mode:
+        - Empty JSONObject
 
 **Please note:** the group will have to be created before use in HVFrCamera. If no groupId is passed, we will assume that `default` group is being used. The `default` group is by default created for all tenants upon creation of the tenant
     
@@ -263,6 +267,31 @@ hvfrcamera.clearCapturedImages();
     - `HVFrCamera.ERROR_CLEAR_CAPTURED_IMAGES_CAMERA_NOT_FREE`: This means that an image capture is in progress. Hence the images cannot be cleared now. When this error occurs, please retry after some time.
     - `HVFrCamera.ERROR_CLEAR_CAPTURED_IMAGES_PROCESSING_STARTED`: This means that an image upload is already in progress and hence the images cannot be cleared now. Please retry once the processing is done and an appropriate callback method of the listener is called.
 
+##### Progress Callbacks
+Following method can be used to set progress callback which includes methods that will be called when the processing on the captured image starts and ends.
+
+```
+hvfrcamera.setProgressListener(myHVFrCameraProgressListener);
+```
+where myHVFrCameraProgressListener can be implemented as:
+```
+HVFrCameraProgressListener myHVFrCameraProgressListener = new HVFrCamera.HVFrCameraProgressListener() {
+	@Override
+	public void onFaceProcessingStart(JSONObject info) {
+		//called when the upload of image to server starts for any FR operation
+		//info will have following details:
+		//	• imageUri: localpath of the face crop image being uploaded to server
+	}
+
+	@Override
+	public void onFaceProcessingEnd() {
+		//called when the server has given a response for the image being uploaded
+	}
+}
+```
+
+Please note that **setting progress callback is completely optional** and if not set, the default progress would be shown by the SDK.
+
 ##### Description of the Error Codes in `onError` callback method of the `myFrCamListener`  is given below: 
 
 |Error Code|Description|Explanation|Action|
@@ -276,7 +305,7 @@ hvfrcamera.clearCapturedImages();
 |6|Internal Server Error|Occurs when there is an internal error at the server.|Notify HyperVerge|
 |7|Request Error|Occurs when the request to server is missing some parameters.| Confirm if all the parameters are passed to the method properly|
 |8|Internal SDK Error|Occurs when an unexpected error has happened with the HyperSecure SDK.|Notify HyperVerge|
-|9|Face Recognition Error|Occurs when there is an error with the Face Recognition. This mosly happens when a Face Recognition/Verification flow is run on a person not already enrolled, face detected by the device is not very clear, unknown person is trying the recognition/verification.| Try again after ensuring that the person is already enrolled and the lightening is also proper.|
+|9|Face Recognition Error|Occurs when there is an error with the Face Recognition. This mosly happens when a Face Recognition/Verification flow is run on a person not already enrolled, face detected by the device is not very clear, unknown person is trying the recognition/verification.| Try again after ensuring that the person is already enrolled and the lighting is also proper.|
 
 ##### Description of the Error Codes in `onCaptureCallback` callback method of the `myFrCamListener`  is given below:
 |Error Code|Description|Explanation|Action|
@@ -289,51 +318,84 @@ hvfrcamera.clearCapturedImages();
 |5|Maximum Image Clicked Error|Occurs when the capture method is called after the number of valid captured images reach a threshold of `5`.|No more images can be clicked. Captured images should be submitted using `submit` method|
     
             
-#### 4. Managing Users, Groups and UserData
+#### 4. Other operations
+ - **Managing Users, Groups and UserData**
 
-Management of Users, Groups and UserData requires the ability to perform operations such as creating/deleting a Group, adding/removing a User from a Group, adding/removing a face registered to a User, etc. A complete list of such operations is given in the table below. 
+	Management of Users, Groups and UserData requires the ability to perform operations such as creating/deleting a Group, adding/removing a User from a Group, adding/removing a face registered to a User, etc. A complete list of such operations is given in the table below. 
 
-| End Point | Request Object | Result |
-|-----------|----------------|--------|
-|/user/edit|{<br/> "userId" : string,<br/> "details" : string<br/>}|{<br/>}|
-|/user/get|{<br/> "userId" : string <br/>}|{<br/> "userId" : string,<br/> "roles" : Array(roles),<br/> "createdDate" : int, <br/> "details"	 : string, <br/>"groups" : Array({<br/>"groupId" : string,<br/>"role" : string<br/>}),<br/>"faces" : Array(faceId)<br/>}|
-|/user/remove|{<br/> "userId" : string<br/>}|{<br/>}|
-|/user/removeFace|{<br/> "userId" : string,<br/> "faceId" : string<br/> }|{<br/>}|
-|/user/fetchFaces|{<br/> "userId" : string <br/>}|{<br/> "faces": Array(string) <br/>}|
-|/user/fetchFaceUrls|{<br/> "userId" : string <br/>}|{<br/> "faceUrls": Array(string) <br/>}|
-|/group/create|{<br/> "groupname" : string,<br/> "sizeLimit" : number <br/>}|{<br/> "groupId" : string <br/>}|
-|/group/get|{<br/> "groupId" : string <br/>}|{<br/>"groupname" : string,<br/> "sizeLimit" : string,<br/> "createdDate" : int <br/>}|
-|/group/edit|{<br/> "groupId" : string,<br/> "params" : {<br/> "groupname" : string,<br/> "sizeLimit" : number <br/>} <br/>}|{<br/>}|
-|/group/remove|{<br/> "groupId" : string <br/>}|{<br/>}|
-|/group/addUser|{<br/> "groupId" : string,<br/> "userId" : string <br/>}|{<br/>}|
-|/group/removeUser|{<br/> "groupId" : string,<br/> "userId" : string <br/>}|{<br/>}|
-|/group/userRole|{<br/> "groupId" : string,<br/> "userId" : string,<br/> "groupRole" : groupRole,/* "user" or "groupAdmin" \*/ <br/>}|{<br/>}|
-|/group/listUsers|{<br/> "groupId" : string <br/>}|{<br/> "users":Array({<br/> "userId" : string,<br/> "details" : string,<br/> "createdTime" : int ,<br/> faces : Array(faceId)}) <br/>}|
+	| End Point | Request Object | Result |
+	|-----------|----------------|--------|
+	|/user/edit|{<br/> "userId" : string,<br/> "details" : string<br/>}|{<br/>}|
+	|/user/get|{<br/> "userId" : string <br/>}|{<br/> "userId" : string,<br/> "roles" : Array(roles),<br/> "createdDate" : int, <br/> "details"	 : string, <br/>"groups" : Array({<br/>"groupId" : string,<br/>"role" : string<br/>}),<br/>"faces" : Array(faceId)<br/>}|
+	|/user/remove|{<br/> "userId" : string<br/>}|{<br/>}|
+	|/user/removeFace|{<br/> "userId" : string,<br/> "faceId" : string<br/> }|{<br/>}|
+	|/user/fetchFaces|{<br/> "userId" : string <br/>}|{<br/> "faces": Array(string) <br/>}|
+	|/user/fetchFaceUrls|{<br/> "userId" : string <br/>}|{<br/> "faceUrls": Array(string) <br/>}|
+	|/group/create|{<br/> "groupname" : string,<br/> "sizeLimit" : number <br/>}|{<br/> "groupId" : string <br/>}|
+	|/group/get|{<br/> "groupId" : string <br/>}|{<br/>"groupname" : string,<br/> "sizeLimit" : string,<br/> "createdDate" : int <br/>}|
+	|/group/edit|{<br/> "groupId" : string,<br/> "params" : {<br/> "groupname" : string,<br/> "sizeLimit" : number <br/>} <br/>}|{<br/>}|
+	|/group/remove|{<br/> "groupId" : string <br/>}|{<br/>}|
+	|/group/addUser|{<br/> "groupId" : string,<br/> "userId" : string <br/>}|{<br/>}|
+	|/group/removeUser|{<br/> "groupId" : string,<br/> "userId" : string <br/>}|{<br/>}|
+	|/group/userRole|{<br/> "groupId" : string,<br/> "userId" : string,<br/> "groupRole" : groupRole,/* "user" or "groupAdmin" \*/ <br/>}|{<br/>}|
+	|/group/listUsers|{<br/> "groupId" : string <br/>}|{<br/> "users":Array({<br/> "userId" : string,<br/> "details" : string,<br/> "createdTime" : int ,<br/> faces : Array(faceId)}) <br/>}|
 
-<br/>
-- Any of the operations mentioned in the table above can be performed using the following method:
-        
-    
-    int requestId = HVOperationManager.makeRequest(endpoint, requestObject, new HVOperationManager.HVOperationListener() {
-    	@Override
-        public void onOperationComplete(JSONObject result) {
-        	//result is a JSON Object has been described later against each end point
-        }
-    
-        @Override
-        public void onError(int errCode, String errMsg) {
-        	//errCode: error code stating type of error
-            //errMsg: a message giving more info on the error
-        }
-    });
-    
+	<br/>
+	- Any of the operations mentioned in the table above can be performed using the following method:
 
-- To `cancel` an operation started using HVOperationManager's `makeRequest` method, following method can be used:
 
-    ```
-        boolean isCancelled = HVOperationManager.cancelRequest(requestId);
-    ```
-    where `requestId` was returned by the corresponding `makeRequest` method that is needed to be cancelled.
+	    int requestId = HVOperationManager.makeRequest(endpoint, requestObject, new HVOperationManager.HVOperationListener() {
+		@Override
+		public void onOperationComplete(JSONObject result) {
+			//result is a JSON Object has been described earlier against each end point
+		}
+
+		@Override
+		public void onError(int errCode, String errMsg) {
+			//errCode: error code stating type of error
+			//errMsg: a message giving more info on the error
+		}
+	    });
+	    
+ - **Process captured images**
+
+	To perform an operation that requires one or more locally present images to be uploaded to the server, one of the following operation can be used. These operations can enable the developer to enroll a user using one or more face images, add one or more face images to a user, perform face based authentication using a face image, perform 1:1 recognition or 1:N recognition using an image saved in the device.
+
+	| End Point | Request  | imageUriJSON | Result |
+	|-----------|----------------|-----|--------|
+	|/user/faceauth|{<br/> "userId" : String<br/>}| {<br/> "image" : String(local path of image)<br/>} |{<br/> "token" : String<br/>}|
+	|/user/enroll|{<br/>"userId" : String,<br/> <br/>"groupId" : String,<br/> <br/> "details" : String<br/>}| {<br/> "image1" : String(local path of image)<br/>, <br/> "image2" : String(local path of image)<br/>, ...<br/>} |{<br/> "faceIds" : [<br/>{<br/>"label": "image1",<br/>"faceId": String<br/>},<br/>...<br/>],<faceId><br/> "faceId" : String<br/>}|
+	|/user/addFace|{<br/> "userId" : String<br/>}| {<br/> "image1" : String(local path of image)<br/>, <br/> "image2" : String(local path of image)<br/>, ...<br/>} |{<br/> "faceIds" : [<br/>{<br/>"label": "image1",<br/>"faceId": String<br/>},<br/>...<br/>],<faceId><br/> "faceId" : String<br/>}|
+	|/image/verify|{<br/> "userId" : String<br/>}| {<br/> "image" : String(local path of image)<br/>} |{<br/> "faceId" : String,<br/> "personId" : String,<br/> "userDetails" : {<br/> "details" : String,<br/>"userId": String<br/>}, <br/> "exists" : Boolean,<br/> "conf" : Integer<br/>}|
+	|/image/recognize|{<br/> "groupId" : String<br/>}| {<br/> "image" : String(local path of image)<br/>} |{<br/> "faceId" : String,<br/>"personId" : String,<br/> "userDetails" : {<br/> "details" : String,<br/>"userId": String<br/>}, <br/> "exists" : Boolean,<br/> "conf" : Integer<br/>}|
+
+	<br/>
+
+	- Any of the operations mentioned in the table above can be performed using the following method:
+
+	```
+	int requestId = HVOperationManager.makeRequest(endpoint, imageUriJSON, requestObject, new HVOperationManager.HVOperationListener() {
+		@Override
+		public void onOperationComplete(JSONObject result) {
+			//result is a JSON Object has been described earlier against each end point
+		}
+
+		@Override
+		public void onError(int errCode, String errMsg) {
+			//errCode: error code stating type of error
+			//errMsg: a message giving more info on the error
+		}
+	});
+	```
+
+- **Cancelling Operation** 
+
+	To `cancel` an operation started using HVOperationManager's `makeRequest` method, following method can be used:
+
+	```
+	boolean isCancelled = HVOperationManager.cancelRequest(requestId);
+	```
+	where `requestId` was returned by the corresponding `makeRequest` method that is needed to be cancelled.
 
 ##### Description of the Error Codes is given below: 
 
@@ -364,8 +426,12 @@ Management of Users, Groups and UserData requires the ability to perform operati
 |616|INPUT_USER_ALREADY_EXIST |Occurs when a user with `userId` provided already exists|Provide a new unique `userId` and retry|
 |617|INPUT_GROUP_NOT_FOUND |Occurs when no group is associated with the `groupId` provided|Provide correct `groupId` and retry|
 |618|INPUT_GROUP_ALREADY_EXIST |Occurs when a group already exists with the `groupId` provided|Provide a new unique `groupId` and retry|
+|619|INPUT_FACE_NOT_PRESENT_IN_IMAGE |Occurs when no face is present in the image provided in `imageUriJSON`|Provide a correct image having atleast one face in `imageUriJSON` and retry|
+|620|INPUT_FACE_NOT_MATCH |Occurs when face present in the image provided in `imageUriJSON` doesnot matched with the template used while `registration` or `face add`|Make sure the `userId` passed in `request` and face image passed in `imageUriJSON` match|
 |621|INPUT_OTP_MISMATCH |Occurs when the OTP provided doesnot match the one that is sent to the user|Provide correct `otp` and retry|
-|622|ERROR_INPUT_INVALID_ENDPOINT |Occurs when the `endPoint` provided is not valid|Provide correct the `endPoint` and retry|
+|622|INPUT_INVALID_ENDPOINT |Occurs when the `endPoint` provided is not valid|Provide correct the `endPoint` and retry|
+|623|INPUT_INVALID_IMAGE_PATH |Occurs when `imageUriJSON` is null or no file exists in one or more imagepath passed in `imageUriJSON`|Validate `imageUriJSON` and the image path passed in it and then retry|
+|624|ERROR_INPUT_ILLEGAL_PARAMETER |Occurs when one or more illegal key is provided in `request` JSONObject|Remove the illegal key value pair from `request` and retry|
 |699|INPUT_OTHER |Occurs when some other issue is with the input|Read the log message for detailed explanation|
 
 
