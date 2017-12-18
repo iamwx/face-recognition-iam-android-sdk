@@ -220,7 +220,6 @@ public class CamFragment extends Fragment implements View.OnClickListener, Toolb
     private void safeCapture() {
         if (cameraFree.get() && !autoCaptureEnabled) {
             cameraFree.set(false);
-            flashScreen();
             hvFrCamera.capture();
         }
     }
@@ -239,30 +238,6 @@ public class CamFragment extends Fragment implements View.OnClickListener, Toolb
             menu.findItem(R.id.action_disable_auto_capture).setEnabled(false);
             menu.findItem(R.id.action_disable_auto_capture).setChecked(true);
         }
-    }
-
-    private void flashScreen() {
-        AlphaAnimation animation = new AlphaAnimation(0.6f, 0.0f);
-        animation.setDuration(300);
-        animation.setInterpolator(new DecelerateInterpolator(2));
-        animation.setFillAfter(true);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                vFlash.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                vFlash.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        vFlash.startAnimation(animation);
     }
 
     private void autoCaptureEnableDisbleBtnClicked(MenuItem menuItem){
