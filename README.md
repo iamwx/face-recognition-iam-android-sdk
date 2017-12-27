@@ -42,7 +42,7 @@ A high-level overview of the Face Recognition workflow is as follows:
 
         ```
         dependencies {
-            compile('co.hyperverge:hypersecuresdk:1.2.1@aar', {
+            compile('co.hyperverge:hypersecuresdk:1.2.4@aar', {
                 transitive=true
             })
         }
@@ -291,6 +291,18 @@ HVFrCameraProgressListener myHVFrCameraProgressListener = new HVFrCamera.HVFrCam
 ```
 
 Please note that **setting progress callback is completely optional** and if not set, the default progress would be shown by the SDK.
+
+##### Screen Brightness
+By default, the screen brightness is set to maximum whenever HVFrCamera View is being displayed. To control this, following method can be used:
+
+```
+hvfrcamera.enableDisableFullBrightness(activity, shouldEnable);
+```
+where 
+- **activity** is the Activity Object which contains the HVFrCamera View. If HVFrCamera is a part of a Fragment or something similar, the enclosing Activity object needs to be passed.
+- **shouldEnable** can be
+	- **true**, if screen brightness has to be set to maximum
+	- **false**, if screen brightness has to be set to a value equivalent to that in the Device's Settings
 
 ##### Description of the Error Codes in `onError` callback method of the `myFrCamListener`  is given below: 
 
