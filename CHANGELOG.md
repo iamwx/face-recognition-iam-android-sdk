@@ -11,3 +11,10 @@
 #### Version 1.2.4
 ##### - Added:
 - Method to control screen brightness with HVFrCamera View
+
+#### Version 1.2.5
+##### - Bug Fixes:
+- Possible crash fix upon call of HVFrCamera's stopCamera method.
+
+##### - Improvements:
+- Calling HVFrCameraProgressListener's onFaceProcessingEnd method when pauseFR is called while face image upload is in progress 
