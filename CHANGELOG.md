@@ -18,3 +18,8 @@
 
 ##### - Improvements:
 - Calling HVFrCameraProgressListener's onFaceProcessingEnd method when pauseFR is called while face image upload is in progress 
+
+#### Version 1.2.6
+##### - Bug Fixes:
+- Progress Dialog not getting disabled when no internet is present for HVFrCamera operations
+- onFaceProcessingEnd getting called before onFaceProcessingStart in case of no internet
