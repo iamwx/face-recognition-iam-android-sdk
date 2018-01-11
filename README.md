@@ -42,7 +42,7 @@ A high-level overview of the Face Recognition workflow is as follows:
 
         ```
         dependencies {
-            compile('co.hyperverge:hypersecuresdk:1.2.5@aar', {
+            compile('co.hyperverge:hypersecuresdk:1.2.6@aar', {
                 transitive=true
             })
         }
